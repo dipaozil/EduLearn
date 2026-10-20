@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Aplikasi Pendidikan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        nav {
+            background: white;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        nav button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            background: #1d4ed8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ddd;
+        }
+
+        .card h2 {
+            color: #2563eb;
+        }
+
+        .materi {
+            background: #eff6ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #cbd5e1;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            background: #dbeafe;
+        }
+
+        #hasil {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16a34a;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1e293b;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 EduLearn</h1>
+    <p>Aplikasi Pendidikan untuk Belajar dan Berlatih</p>
+</header>
+
+<nav>
+    <button onclick="tampilkan('beranda')">Beranda</button>
+    <button onclick="tampilkan('materi')">Materi</button>
+    <button onclick="tampilkan('kuis')">Kuis</button>
+</nav>
+
+<div class="container">
+
+    <!-- BERANDA -->
+    <section id="beranda" class="card">
+        <h2>Selamat Datang di EduLearn 👋</h2>
+        <p>
+            EduLearn adalah aplikasi pendidikan sederhana yang membantu
+            siswa belajar materi pelajaran dan mengerjakan kuis.
+        </p>
+
+        <div class="materi">
+            <h3>🎯 Tujuan Aplikasi</h3>
+            <p>
+                Membantu siswa belajar dengan cara yang mudah,
+                menarik, dan interaktif.
+            </p>
+        </div>
+
+        <div class="materi">
+            <h3>📖 Fitur</h3>
+            <p>✔ Materi pembelajaran</p>
+            <p>✔ Kuis pilihan ganda</p>
+            <p>✔ Nilai otomatis</p>
+        </div>
+    </section>
+
+    <!-- MATERI -->
+    <section id="materi" class="card" style="display:none;">
+        <h2>📖 Materi Pembelajaran</h2>
+
+        <div class="materi">
+            <h3>Matematika</h3>
+            <p>
+                Barisan geometri adalah barisan bilangan yang
+                memiliki rasio tetap antara dua suku yang berurutan.
+            </p>
+        </div>
+
+        <div class="materi">
+            <h3>Fisika</h3>
+            <p>
+                Momentum adalah hasil perkalian massa benda dengan
+                kecepatannya. Rumus: <b>p = m × v</b>.
+            </p>
+        </div>
+
+        <div class="materi">
+            <h3>Biologi</h3>
+            <p>
+                Fotosintesis adalah proses tumbuhan membuat makanan
+                dengan bantuan cahaya matahari.
+            </p>
+        </div>
+    </section>
+
+    <!-- KUIS -->
+    <section id="kuis" class="card" style="display:none;">
+        <h2>📝 Kuis Pendidikan</h2>
+
+        <div id="soal"></div>
+
+        <button onclick="jawab()" 
+                style="padding:12px 20px;
+                background:#2563eb;
+                color:white;
+                border:none;
+                border-radius:8px;
+                cursor:pointer;">
+            Jawab
+        </button>
+
+        <p id="hasil"></p>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 EduLearn | Aplikasi Pendidikan</p>
+</footer>
+
+<script>
+
+    function tampilkan(id) {
+        document.getElementById("beranda").style.display = "none";
+        document.getElementById("materi").style.display = "none";
+        document.getElementById("kuis").style.display = "none";
+
+        document.getElementById(id).style.display = "block";
+    }
+
+    const pertanyaan = [
+        {
+            soal: "Rumus momentum yang benar adalah...",
+            pilihan: [
+                "p = m × v",
+                "p = m + v",
+                "p = m ÷ v",
+                "p = m - v"
+            ],
+            jawaban: 0
+        },
+        {
+            soal: "Proses tumbuhan membuat makanan disebut...",
+            pilihan: [
+                "Respirasi",
+                "Fotosintesis",
+                "Transpirasi",
+                "Evaporasi"
+            ],
+            jawaban: 1
+        },
+        {
+            soal: "Hasil dari 5 × 4 adalah...",
+            pilihan: [
+                "10",
+                "15",
+                "20",
+                "25"
+            ],
+            jawaban: 2
+        }
+    ];
+
+    let index = 0;
+    let skor = 0;
+
+    function tampilkanSoal() {
+
+        if (index >= pertanyaan.length) {
+            document.getElementById("soal").innerHTML =
+                "<h3>Kuis selesai! 🎉</h3>";
+
+            document.getElementById("hasil").innerHTML =
+                "Nilai kamu: " + skor + " / " + pertanyaan.length;
+
+            return;
+        }
+
+        let data = pertanyaan[index];
+
+        let html = "<h3>" + (index + 1) + ". " + data.soal + "</h3>";
+
+        data.pilihan.forEach((pilihan, i) => {
+            html += `
+                <label class="quiz-option">
+                    <input type="radio" name="jawaban" value="${i}">
+                    ${pilihan}
+                </label>
+            `;
+        });
+
+        document.getElementById("soal").innerHTML = html;
+    }
+
+    function jawab() {
+
+        const pilihan = document.querySelector(
+            'input[name="jawaban"]:checked'
+        );
+
+        if (!pilihan) {
+            alert("Silakan pilih jawaban terlebih dahulu!");
+            return;
+        }
+
+        if (Number(pilihan.value) === pertanyaan[index].jawaban) {
+            skor++;
+        }
+
+        index++;
+        tampilkanSoal();
+    }
+
+    tampilkanSoal();
+
+</script>
+
+</body>
+</html>
